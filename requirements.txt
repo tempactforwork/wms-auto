@@ -1,0 +1,6 @@
+playwright
+pandas
+openpyxl
+pyarrow
+supabase
+python-dotenv
