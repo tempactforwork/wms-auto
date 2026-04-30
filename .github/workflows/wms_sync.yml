@@ -2,7 +2,7 @@ name: WMS 재고 자동 수집
 
 on:
   schedule:
-    - cron: '15 21-23,0-12 * * *'
+    - cron: '21 21-23,0-12 * * *'
   workflow_dispatch:
 
 jobs:
