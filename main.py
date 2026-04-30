@@ -10,6 +10,7 @@ from scraper import ErpInventoryScraper
 
 load_dotenv()
 
+# 임시
 UPLOAD_FILENAME = "inventory_latest.parquet"
 DOWNLOAD_DIR = "./downloads"
 KST = timezone(timedelta(hours=9))
