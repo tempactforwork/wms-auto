@@ -18,7 +18,15 @@ KST = timezone(timedelta(hours=9))
 
 def process(file_path: str) -> pd.DataFrame:
     df = pd.read_excel(file_path)
-    df = df[["품목코드", "품목명", "로트번호", "가용수량", "가용중량(Kg)", "소비기한", "잔여기간", "잔여율"]].copy()
+    df = df[["존코드", "품목코드", "품목명", "로트번호", "가용수량", "가용중량(Kg)", "소비기한", "잔여기간", "잔여율"]].copy()
+    df = df[~df['존코드'].str.contains('SHP|DMG')].copy()
+    df = df.groupby(['품목코드', '품목명', '로트번호']).agg({
+            '가용수량':'sum',
+            '가용중량(Kg)':'sum',
+            '소비기한':'first',
+            '잔여기간':'first',
+            '잔여율':'first'
+        }).reset_index()
     df["소비기한"] = pd.to_datetime(df["소비기한"], format="%Y.%m.%d", errors="coerce")
     df["최종 업데이트 일시"] = datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
     return df
